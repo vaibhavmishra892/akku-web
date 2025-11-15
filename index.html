@@ -14,6 +14,7 @@
       align-items: center;
       height: 100vh;
       text-align: center;
+      overflow:hidden;
     }
     .card {
       background: white;
@@ -39,6 +40,7 @@
     <h1>Hey, Akku</h1>
     <p>You're a really amazing friend and you deserve cute things ✨</p>
 
+    <!-- CLICK BUTTON -->
     <button id="btn" style="margin-top:16px; padding:10px 18px; border:none; background:#ff7a9e; color:white; border-radius:12px; cursor:pointer; font-size:1rem;">Click me!</button>
     <p id="msg" style="margin-top:16px; font-weight:bold; display:none;">You're awesome, thanks for being you ✨</p>
 
@@ -64,7 +66,7 @@
   </div>
 
 <script>
-  // Compliments
+  // CLICK BUTTON FIXED + HEART BURST
   const compliments = [
     "You're a great friend, Akku!",
     "Your energy makes everything better.",
@@ -77,12 +79,31 @@
   const msg = document.getElementById('msg');
 
   btn.addEventListener('click', () => {
-    const random = compliments[Math.floor(Math.random() * compliments.length)];
-    msg.textContent = random;
+    msg.textContent = compliments[Math.floor(Math.random() * compliments.length)];
     msg.style.display = 'block';
+    burstHearts();
   });
 
-  // Quotes Rotation
+  function burstHearts() {
+    for (let i = 0; i < 15; i++) {
+      const h = document.createElement('div');
+      h.textContent = '💖';
+      h.style.position = 'fixed';
+      h.style.left = 50 + Math.random() * 200 + 'px';
+      h.style.top = 50 + Math.random() * 200 + 'px';
+      h.style.fontSize = '20px';
+      h.style.opacity = 1;
+      h.style.transition = '1s';
+      document.body.appendChild(h);
+      setTimeout(() => {
+        h.style.transform = 'translateY(-80px)';
+        h.style.opacity = 0;
+      }, 50);
+      setTimeout(() => h.remove(), 1100);
+    }
+  }
+
+  // QUOTES ROTATION
   const quotes = [
     "You're a wonderful friend 💗",
     "Your smile is literally sunshine ☀️",
@@ -94,16 +115,45 @@
     document.getElementById('quoteText').textContent = quotes[Math.floor(Math.random() * quotes.length)];
   }, 5000);
 
-  // Mood theme changer
+  // MOOD BUTTON EFFECTS + EMOJI SPAM
   const moodButtons = document.querySelectorAll('.moodBtn');
   moodButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       const mood = btn.dataset.mood;
-      if (mood === 'happy') document.body.style.background = 'linear-gradient(120deg, #ff9a9e, #fad0c4)';
-      if (mood === 'calm') document.body.style.background = 'linear-gradient(120deg, #a1c4fd, #c2e9fb)';
-      if (mood === 'cute') document.body.style.background = 'linear-gradient(120deg, #fbc2eb, #a6c1ee)';
+
+      if (mood === 'happy') {
+        document.body.style.background = 'linear-gradient(120deg, #ff9a9e, #fad0c4)';
+        spamEmoji('🌈');
+      }
+      if (mood === 'calm') {
+        document.body.style.background = 'linear-gradient(120deg, #a1c4fd, #c2e9fb)';
+        spamEmoji('🌙');
+      }
+      if (mood === 'cute') {
+        document.body.style.background = 'linear-gradient(120deg, #fbc2eb, #a6c1ee)';
+        spamEmoji('🧸');
+      }
     });
   });
+
+  function spamEmoji(icon) {
+    for (let i = 0; i < 20; i++) {
+      const e = document.createElement('div');
+      e.textContent = icon;
+      e.style.position = 'fixed';
+      e.style.left = Math.random() * window.innerWidth + 'px';
+      e.style.top = Math.random() * window.innerHeight + 'px';
+      e.style.fontSize = '26px';
+      e.style.opacity = 1;
+      e.style.transition = '1s';
+      document.body.appendChild(e);
+      setTimeout(() => {
+        e.style.transform = 'translateY(-80px)';
+        e.style.opacity = 0;
+      }, 100);
+      setTimeout(() => e.remove(), 1100);
+    }
+  }
 </script>
 
 </body>
