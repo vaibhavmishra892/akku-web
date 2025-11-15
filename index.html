@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>For You ❤️</title>
+  <title>For Akku ❤️</title>
   <style>
     body {
       margin: 0;
@@ -20,42 +20,27 @@
       padding: 32px;
       border-radius: 24px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      max-width: 400px;
+      max-width: 420px;
       animation: pop 0.7s ease;
     }
     @keyframes pop {
       from { transform: scale(0.8); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 12px;
-      color: #ff4f70;
-    }
-    p {
-      font-size: 1.1rem;
-    }
-    .heart {
-      font-size: 48px;
-      animation: beat 1.3s infinite;
-    }
-    @keyframes beat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-    }
+    h1 { color: #ff4f70; }
+    .heart { font-size: 48px; animation: beat 1.3s infinite; }
+    @keyframes beat { 50% { transform: scale(1.2); } }
+    .moodBtn { padding:10px 16px; border:none; border-radius:12px; cursor:pointer; font-size:1rem; color:white; }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="heart">❤️</div>
     <h1>Hey, Akku</h1>
-    <p>You're one of the coolest people I know, and I appreciate you a lot.<br>
-    I made this little page just to make you smile. 😊</p>
-      <br>
+    <p>You're a really amazing friend and you deserve cute things ✨</p>
+
     <button id="btn" style="margin-top:16px; padding:10px 18px; border:none; background:#ff7a9e; color:white; border-radius:12px; cursor:pointer; font-size:1rem;">Click me!</button>
     <p id="msg" style="margin-top:16px; font-weight:bold; display:none;">You're awesome, thanks for being you ✨</p>
-      <!-- Floating hearts -->
-    <div id="hearts"></div>
 
     <!-- Music Video Links -->
     <div id="musicLinks" style="margin-top:24px; display:flex; flex-direction:column; gap:10px; text-align:center;">
@@ -64,143 +49,62 @@
       <a href="https://www.youtube.com/watch?v=-F6AjkoGad8&list=RD-F6AjkoGad8&start_radio=1" target="_blank" style="background:#ffe8a3; padding:12px; border-radius:12px; text-decoration:none; color:#d88900; font-weight:bold;">Happy Energy 🌈</a>
     </div>
 
-    
+    <!-- Mood Buttons -->
+    <div style="margin-top:24px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <button class="moodBtn" data-mood="happy" style="background:#ff9ecb;">Happy 🌈</button>
+      <button class="moodBtn" data-mood="calm" style="background:#a7d8ff;">Calm 🌙</button>
+      <button class="moodBtn" data-mood="cute" style="background:#ffd39b;">Cute 🧸</button>
+    </div>
 
-    <!-- Message of the Day -->
-    <p id="motd" style="margin-top:20px; font-style:italic; font-size:1rem; color:#ff4f70;"></p>
-      <!-- Floating hearts -->
-    <div id="hearts"></div>
-
-    <!-- Cute Quote Box -->
+    <!-- Quote Box -->
     <div id="quoteBox" style="margin-top:24px; padding:16px; background:#ffe6ee; border-radius:16px; font-size:1rem; color:#ff3d6b; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
       <span id="quoteText">You're amazing just the way you are ✨</span>
     </div>
 
-    <!-- Sparkle Trail -->
-    <div id="sparkles"></div>
-
-    <!-- Mood Buttons -->
-    <div style="margin-top:24px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-      <button class="moodBtn" data-mood="happy" style="padding:10px 16px; border:none; background:#ff9ecb; color:white; border-radius:12px; cursor:pointer;">Happy 🌈</button>
-      <button class="moodBtn" data-mood="calm" style="padding:10px 16px; border:none; background:#a7d8ff; color:white; border-radius:12px; cursor:pointer;">Calm 🌙</button>
-      <button class="moodBtn" data-mood="cute" style="padding:10px 16px; border:none; background:#ffd39b; color:white; border-radius:12px; cursor:pointer;">Cute 🧸</button>
-    </div>
-
-    <!-- Message of the Day -->
-    <p id="motd" style="margin-top:20px; font-style:italic; font-size:1rem; color:#ff4f70;"></p>
   </div>
+
 <script>
-    document.getElementById('btn').addEventListener('click', () => {
-      document.getElementById('msg').style.display = 'block';
-    });
-      // Random compliments
-    const compliments = [
-      "You're a great friend, Akku!",
-      "Your energy makes everything better.",
-      "You have a really kind heart.",
-      "Thanks for always being awesome!",
-      "Talking to you always improves my day." 
-    ];
+  // Compliments
+  const compliments = [
+    "You're a great friend, Akku!",
+    "Your energy makes everything better.",
+    "You have a really kind heart.",
+    "Thanks for always being awesome!",
+    "Talking to you always improves my day."
+  ];
 
-    const btn = document.getElementById('btn');
-    const msg = document.getElementById('msg');
+  const btn = document.getElementById('btn');
+  const msg = document.getElementById('msg');
 
+  btn.addEventListener('click', () => {
+    const random = compliments[Math.floor(Math.random() * compliments.length)];
+    msg.textContent = random;
+    msg.style.display = 'block';
+  });
+
+  // Quotes Rotation
+  const quotes = [
+    "You're a wonderful friend 💗",
+    "Your smile is literally sunshine ☀️",
+    "You make people feel comfortable 🧸",
+    "Someone is proud of you today ✨",
+    "You’re sweeter than you think 🍬"
+  ];
+  setInterval(() => {
+    document.getElementById('quoteText').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+  }, 5000);
+
+  // Mood theme changer
+  const moodButtons = document.querySelectorAll('.moodBtn');
+  moodButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      const random = compliments[Math.floor(Math.random() * compliments.length)];
-      msg.textContent = random;
-      msg.style.display = 'block';
-      launchConfetti();
+      const mood = btn.dataset.mood;
+      if (mood === 'happy') document.body.style.background = 'linear-gradient(120deg, #ff9a9e, #fad0c4)';
+      if (mood === 'calm') document.body.style.background = 'linear-gradient(120deg, #a1c4fd, #c2e9fb)';
+      if (mood === 'cute') document.body.style.background = 'linear-gradient(120deg, #fbc2eb, #a6c1ee)';
     });
+  });
+</script>
 
-    // Floating hearts animation
-    function floatingHearts() {
-      const heart = document.createElement('div');
-      heart.textContent = '💗';
-      heart.style.position = 'fixed';
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      heart.style.bottom = '-20px';
-      heart.style.fontSize = '24px';
-      heart.style.opacity = 0.9;
-      heart.style.animation = 'floatUp 4s linear forwards';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
-    }
-    setInterval(floatingHearts, 800);
-
-    // Music toggle
-    const music = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('musicBtn');
-    let playing = false;
-    musicBtn.onclick = () => {
-      playing ? music.pause() : music.play();
-      musicBtn.textContent = playing ? 'Play Music 🎵' : 'Pause Music ⏸️';
-      playing = !playing;
-    };
-
-    // Message of the Day
-    const dailyMessages = [
-      "Hope you smile today, Akku ❤️",
-      "Your vibe is unmatched 🌸",
-      "Someone out there is grateful for you ✨",
-      "Today will be a good day! 🌞",
-      "You deserve good things 💗"
-    ];
-    document.getElementById('motd').textContent = dailyMessages[new Date().getDay()];
-
-    (() => sparkle.remove(), 1000);
-    });
-
-    // Quote rotation
-    const quotes = [
-      "You're a wonderful friend 💗",
-      "Your smile is literally sunshine ☀️",
-      "You make people feel comfortable 🧸",
-      "Someone is proud of you today ✨",
-      "You’re sweeter than you think 🍬"
-    ];
-    setInterval(() => {
-      document.getElementById('quoteText').textContent = quotes[Math.floor(Math.random() * quotes.length)];
-    }, 5000);
-
-    // Mood themes
-    const moodButtons = document.querySelectorAll('.moodBtn');
-    moodButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const mood = btn.dataset.mood;
-        if (mood === 'happy') document.body.style.background = 'linear-gradient(120deg, #ff9a9e, #fad0c4)';
-        if (mood === 'calm') document.body.style.background = 'linear-gradient(120deg, #a1c4fd, #c2e9fb)';
-        if (mood === 'cute') document.body.style.background = 'linear-gradient(120deg, #fbc2eb, #a6c1ee)';
-      });
-    });
-
-    // Confetti effect
-    function launchConfetti() {
-      const duration = 1000;
-      const end = Date.now() + duration;
-
-      (function frame() {
-        const particle = document.createElement('div');
-        particle.style.position = 'fixed';
-        particle.style.width = '8px';
-        particle.style.height = '8px';
-        particle.style.background = '#ff7a9e';
-        particle.style.borderRadius = '50%';
-        particle.style.left = Math.random() * window.innerWidth + 'px';
-        particle.style.top = '-10px';
-        particle.style.opacity = 0.9;
-        particle.style.transition = 'transform 1s linear, opacity 1s';
-        document.body.appendChild(particle);
-
-        requestAnimationFrame(() => {
-          particle.style.transform = `translateY(${window.innerHeight + 20}px)`;
-          particle.style.opacity = 0;
-        });
-
-        setTimeout(() => particle.remove(), 1000);
-
-        if (Date.now() < end) requestAnimationFrame(frame);
-      })();
-    }
-  </script>
 </body>
 </html>
