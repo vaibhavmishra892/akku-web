@@ -66,7 +66,27 @@
 
     <!-- Music toggle -->
     <button id="musicBtn" style="margin-top:20px; padding:10px 18px; border:none; background:#ffb6c9; color:white; border-radius:12px; cursor:pointer; font-size:1rem;">Play Music 🎵</button>
-    <audio id="bgMusic" src="https://www.fesliyanstudios.com/play-mp3/387" loop></audio>
+    <audio id="bgMusic" src="https://www.youtube.com/watch?v=HJIRktKAahU" loop></audio>
+
+    <!-- Message of the Day -->
+    <p id="motd" style="margin-top:20px; font-style:italic; font-size:1rem; color:#ff4f70;"></p>
+      <!-- Floating hearts -->
+    <div id="hearts"></div>
+
+    <!-- Cute Quote Box -->
+    <div id="quoteBox" style="margin-top:24px; padding:16px; background:#ffe6ee; border-radius:16px; font-size:1rem; color:#ff3d6b; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
+      <span id="quoteText">You're amazing just the way you are ✨</span>
+    </div>
+
+    <!-- Sparkle Trail -->
+    <div id="sparkles"></div>
+
+    <!-- Mood Buttons -->
+    <div style="margin-top:24px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <button class="moodBtn" data-mood="happy" style="padding:10px 16px; border:none; background:#ff9ecb; color:white; border-radius:12px; cursor:pointer;">Happy 🌈</button>
+      <button class="moodBtn" data-mood="calm" style="padding:10px 16px; border:none; background:#a7d8ff; color:white; border-radius:12px; cursor:pointer;">Calm 🌙</button>
+      <button class="moodBtn" data-mood="cute" style="padding:10px 16px; border:none; background:#ffd39b; color:white; border-radius:12px; cursor:pointer;">Cute 🧸</button>
+    </div>
 
     <!-- Message of the Day -->
     <p id="motd" style="margin-top:20px; font-style:italic; font-size:1rem; color:#ff4f70;"></p>
@@ -129,6 +149,42 @@
     ];
     document.getElementById('motd').textContent = dailyMessages[new Date().getDay()];
 
+    // Sparkle trail
+    document.addEventListener('mousemove', (e) => {
+      const sparkle = document.createElement('div');
+      sparkle.textContent = '✨';
+      sparkle.style.position = 'fixed';
+      sparkle.style.left = e.pageX + 'px';
+      sparkle.style.top = e.pageY + 'px';
+      sparkle.style.pointerEvents = 'none';
+      sparkle.style.animation = 'fade 1s forwards';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 1000);
+    });
+
+    // Quote rotation
+    const quotes = [
+      "You're a wonderful friend 💗",
+      "Your smile is literally sunshine ☀️",
+      "You make people feel comfortable 🧸",
+      "Someone is proud of you today ✨",
+      "You’re sweeter than you think 🍬"
+    ];
+    setInterval(() => {
+      document.getElementById('quoteText').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+    }, 5000);
+
+    // Mood themes
+    const moodButtons = document.querySelectorAll('.moodBtn');
+    moodButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mood = btn.dataset.mood;
+        if (mood === 'happy') document.body.style.background = 'linear-gradient(120deg, #ff9a9e, #fad0c4)';
+        if (mood === 'calm') document.body.style.background = 'linear-gradient(120deg, #a1c4fd, #c2e9fb)';
+        if (mood === 'cute') document.body.style.background = 'linear-gradient(120deg, #fbc2eb, #a6c1ee)';
+      });
+    });
+
     // Confetti effect
     function launchConfetti() {
       const duration = 1000;
@@ -160,4 +216,3 @@
   </script>
 </body>
 </html>
-
