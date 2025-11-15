@@ -54,8 +54,24 @@
       <br>
     <button id="btn" style="margin-top:16px; padding:10px 18px; border:none; background:#ff7a9e; color:white; border-radius:12px; cursor:pointer; font-size:1rem;">Click me!</button>
     <p id="msg" style="margin-top:16px; font-weight:bold; display:none;">You're awesome, thanks for being you ✨</p>
+      <!-- Floating hearts -->
+    <div id="hearts"></div>
+
+    <!-- Photo Gallery -->
+    <div id="gallery" style="margin-top:24px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+      <img src="https://via.placeholder.com/120" style="width:120px; height:120px; border-radius:16px; object-fit:cover;">
+      <img src="https://via.placeholder.com/120" style="width:120px; height:120px; border-radius:16px; object-fit:cover;">
+      <img src="https://via.placeholder.com/120" style="width:120px; height:120px; border-radius:16px; object-fit:cover;">
+    </div>
+
+    <!-- Music toggle -->
+    <button id="musicBtn" style="margin-top:20px; padding:10px 18px; border:none; background:#ffb6c9; color:white; border-radius:12px; cursor:pointer; font-size:1rem;">Play Music 🎵</button>
+    <audio id="bgMusic" src="https://www.fesliyanstudios.com/play-mp3/387" loop></audio>
+
+    <!-- Message of the Day -->
+    <p id="motd" style="margin-top:20px; font-style:italic; font-size:1rem; color:#ff4f70;"></p>
   </div>
-  <script>
+<script>
     document.getElementById('btn').addEventListener('click', () => {
       document.getElementById('msg').style.display = 'block';
     });
@@ -77,6 +93,41 @@
       msg.style.display = 'block';
       launchConfetti();
     });
+
+    // Floating hearts animation
+    function floatingHearts() {
+      const heart = document.createElement('div');
+      heart.textContent = '💗';
+      heart.style.position = 'fixed';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.bottom = '-20px';
+      heart.style.fontSize = '24px';
+      heart.style.opacity = 0.9;
+      heart.style.animation = 'floatUp 4s linear forwards';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+    setInterval(floatingHearts, 800);
+
+    // Music toggle
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicBtn');
+    let playing = false;
+    musicBtn.onclick = () => {
+      playing ? music.pause() : music.play();
+      musicBtn.textContent = playing ? 'Play Music 🎵' : 'Pause Music ⏸️';
+      playing = !playing;
+    };
+
+    // Message of the Day
+    const dailyMessages = [
+      "Hope you smile today, Akku ❤️",
+      "Your vibe is unmatched 🌸",
+      "Someone out there is grateful for you ✨",
+      "Today will be a good day! 🌞",
+      "You deserve good things 💗"
+    ];
+    document.getElementById('motd').textContent = dailyMessages[new Date().getDay()];
 
     // Confetti effect
     function launchConfetti() {
@@ -109,3 +160,4 @@
   </script>
 </body>
 </html>
+
