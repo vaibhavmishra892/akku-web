@@ -59,6 +59,53 @@
     document.getElementById('btn').addEventListener('click', () => {
       document.getElementById('msg').style.display = 'block';
     });
+      // Random compliments
+    const compliments = [
+      "You're a great friend, Akku!",
+      "Your energy makes everything better.",
+      "You have a really kind heart.",
+      "Thanks for always being awesome!",
+      "Talking to you always improves my day." 
+    ];
+
+    const btn = document.getElementById('btn');
+    const msg = document.getElementById('msg');
+
+    btn.addEventListener('click', () => {
+      const random = compliments[Math.floor(Math.random() * compliments.length)];
+      msg.textContent = random;
+      msg.style.display = 'block';
+      launchConfetti();
+    });
+
+    // Confetti effect
+    function launchConfetti() {
+      const duration = 1000;
+      const end = Date.now() + duration;
+
+      (function frame() {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.width = '8px';
+        particle.style.height = '8px';
+        particle.style.background = '#ff7a9e';
+        particle.style.borderRadius = '50%';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = '-10px';
+        particle.style.opacity = 0.9;
+        particle.style.transition = 'transform 1s linear, opacity 1s';
+        document.body.appendChild(particle);
+
+        requestAnimationFrame(() => {
+          particle.style.transform = `translateY(${window.innerHeight + 20}px)`;
+          particle.style.opacity = 0;
+        });
+
+        setTimeout(() => particle.remove(), 1000);
+
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    }
   </script>
 </body>
 </html>
